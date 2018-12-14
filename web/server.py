@@ -13,7 +13,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    target = os.path.join(APP_ROOT,'images/')
+    target = os.path.join(APP_ROOT,'data/prediction_images/')
     print(target)
 
     if not os.path.isdir(target):
@@ -31,7 +31,7 @@ def upload():
 
 @app.route('/upload/<filename>')
 def send_image(filename):
-    return send_from_directory('images',filename)
+    return send_from_directory('data/prediction_images',filename)
 
 # @app.route('/test')
 # def index2():
