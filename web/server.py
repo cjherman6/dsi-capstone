@@ -1,9 +1,11 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
+import src.predict_function_test as pf
+import src.recommender_function as rf
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/submit')
 def index():
     return render_template('upload.html')
 
@@ -23,7 +25,13 @@ def upload():
         destination = '/'.join([target, filename])
         print(destination)
         file.save(destination)
-    return render_template('complete.html')
+
+    # return send_from_directory('images', filename, as_attachment=True)
+    return render_template('complete.html', image_name = filename)
+
+@app.route('/upload/<filename>')
+def send_image(filename):
+    return send_from_directory('images',filename)
 
 # @app.route('/test')
 # def index2():
